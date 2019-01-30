@@ -17,7 +17,7 @@ yaml_lint:
     - mkdir -p /etc/ansible/roles/`basename "$PWD"` && cp -R * /etc/ansible/roles/`basename "$PWD"`
   script:
     - ansible --version
-    - ansible-playbook --syntax-check tests/test.yml
+    - ansible-playbook --syntax-check tests/main.yml
 
 # Do checks on all versions
 syntax-ansible2.5:
