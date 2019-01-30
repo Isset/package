@@ -27,7 +27,7 @@ yaml_lint:
   script:
     - ansible-playbook tests/main.yml
 
-# Do checks on all versions
+# Do syntax checks on all versions
 syntax-ansible2.5:
   <<: *syntax
   image: hyperized/ansible-docker:2.5
@@ -40,15 +40,15 @@ syntax-ansible2.7:
   <<: *syntax
   image: hyperized/ansible-docker:2.7
 
-# Do checks on all versions
+# Do execution checks on all versions
 execute-ansible2.5:
   <<: *execute
-  image: hyperized/ansible-docker:2.5
+  image: hyperized/ansible-docker:2.5-bionic
 
 execute-ansible2.6:
   <<: *execute
-  image: hyperized/ansible-docker:2.6
+  image: hyperized/ansible-docker:2.6-bionic
 
 execute-ansible2.7:
   <<: *execute
-  image: hyperized/ansible-docker:2.7
+  image: hyperized/ansible-docker:2.7-bionic
