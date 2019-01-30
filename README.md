@@ -1,7 +1,7 @@
-isset.package [![build status](https://gitlab.isset.nl/ansible/isset.package/badges/master/build.svg)](https://gitlab.isset.nl/ansible/isset.package/commits/master)
+isset.package [![pipeline status](https://gitlab.isset.nl/operations/isset.package/badges/master/pipeline.svg)](https://gitlab.isset.nl/operations/isset.package/commits/master)
 =========
 
-Ubuntu APT package
+_Ubuntu APT package_
 
 Requirements
 ------------
