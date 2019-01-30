@@ -1,0 +1,33 @@
+image: hyperized/yaml-linter:latest
+
+stages:
+  - yaml
+  - syntax
+
+# If this does not passes, don't bother even trying Ansible :)
+yaml_lint:
+  stage: yaml
+  script:
+    - yaml-lint -i -q .
+
+# Ansible based syntax check
+.syntax_check: &syntax_template
+  stage: syntax
+  before_script:
+    - mkdir -p /etc/ansible/roles/`basename "$PWD"` && cp -R * /etc/ansible/roles/`basename "$PWD"`
+  script:
+    - ansible --version
+    - ansible-playbook --syntax-check tests/test.yml
+
+# Do checks on all versions
+syntax-ansible2.5:
+  <<: *syntax_template
+  image: hyperized/ansible-docker:2.5
+
+syntax-ansible2.6:
+  <<: *syntax_template
+  image: hyperized/ansible-docker:2.6
+
+syntax-ansible2.7:
+  <<: *syntax_template
+  image: hyperized/ansible-docker:2.7
