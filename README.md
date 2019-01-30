@@ -28,7 +28,8 @@ Example Playbook
     - hosts: all
       become: yes
       roles:
-        - { role: isset.package, package_name: htop }
+        - role: isset.package
+          package_name: htop
 
 License
 -------

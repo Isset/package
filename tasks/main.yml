@@ -11,7 +11,7 @@
     update_cache: yes
     cache_valid_time: "{{ package_cache_valid_time }}"
   register: result
-  until: result | success
+  until: result is success
   retries: "{{ package_max_retries }}"
   delay: "{{ package_delay }}"
   ignore_errors: yes
