@@ -9,6 +9,9 @@
     - command: dpkg -l htop
       register: dpkg
 
+    - debug:
+        var: dpkg
+
     - assert:
         that:
           - '"no packages found matching" not in dpkg.stdout_lines'
