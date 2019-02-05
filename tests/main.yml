@@ -4,3 +4,12 @@
   roles:
     - role: isset.package
       package_name: htop
+
+  tasks:
+    - command: dpkg -l htop
+      register: dpkg
+
+    - assert:
+        that:
+          - '"no packages found matching" not in madison.stdout_lines'
+          - '"ii" in dpkg.stdout_lines'
