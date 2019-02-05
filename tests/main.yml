@@ -14,5 +14,5 @@
 
     - assert:
         that:
-          - '"no packages found matching" not in dpkg.stdout_lines'
-          - '"ii" in dpkg.stdout_lines'
+          - '"no packages found matching" not in dpkg.stdout'
+          - '"ii" in dpkg.stdout'
