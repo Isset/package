@@ -8,6 +8,7 @@
   tasks:
     - command: dpkg -l htop
       register: dpkg
+      changed_when: False
 
     - assert:
         that:

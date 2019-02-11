@@ -11,21 +11,29 @@ yaml_lint:
   script:
     - yaml-lint -i -q .
 
+# Before script anchor
+.before: &before
+  before_script:
+    - mkdir -p /etc/ansible/roles/`basename "$PWD"` && cp -R * /etc/ansible/roles/`basename "$PWD"`
+
 # Ansible based syntax check
 .syntax_check: &syntax
   stage: syntax
-  before_script:
-    - mkdir -p /etc/ansible/roles/`basename "$PWD"` && cp -R * /etc/ansible/roles/`basename "$PWD"`
+  <<: *before
   script:
     - ansible --version
     - ansible-playbook --syntax-check tests/main.yml
 
 .execute: &execute
   stage: execute
-  before_script:
-    - mkdir -p /etc/ansible/roles/`basename "$PWD"` && cp -R * /etc/ansible/roles/`basename "$PWD"`
+  <<: *before
   script:
     - ansible-playbook tests/main.yml
+    - >
+      ansible-playbook tests/main.yml
+      | grep -q 'changed=0.*failed=0'
+      && (echo 'Idempotence test: pass' && exit 0)
+      || (echo 'Idempotence test: fail' && exit 1)
 
 # Do syntax checks on all versions
 syntax-ansible2.5:
