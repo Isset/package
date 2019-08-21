@@ -1,4 +1,9 @@
 ---
+# Ansible prefers aptitude
+- name: install aptitude
+  apt:
+    name: aptitude
+
 - name: ensure cache_valid_time is set
   set_fact:
     package_cache_valid_time: "{{ apt_cache_valid_time }}"
